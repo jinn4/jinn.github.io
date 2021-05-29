@@ -1,17 +1,13 @@
-let nt = document.querySelector("input")
-let bt = document.querySelector("button")
-let t  = document.querySelector("ul")
-bt.addEventListener("click", ()=>{
-	nt = document.querySelector("input")
-	let np = document.createElement("li")
-	np.innerText = nt.value	
-	t.appendChild(np)
-	np.addEventListener("click", ()=>{
-		np.style.setProperty("text-decoration", "line-through") 
+fetch("https://api.github.com/emojis").then(
+	function(data){
+		return data.json
+	}).then(
+	function(data){
+		let body = document.querySelector("body")
+		for(let i in data){
+			let img = document.createElement("img")
+			img.setAttribute("src", data[i])
+			body.appendChild(img)
+		}
 	})
-	np.addEventListener("dblclick", ()=>{
-		t.removeChild(np)
-	})
-	nt.focus()
-	nt.value = ""
-})
+	
